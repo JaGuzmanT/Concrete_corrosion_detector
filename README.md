@@ -2,11 +2,11 @@
 
 ![Corrosion Detection](corrosion_detection.jpg)
 
-This repository contains a model implemented using the YOLOv3 algorithm foto detect corrosion in concrete structures. The model has been trained on a custom dataset of images of various concrete structures, focusing on identifying areas affected by corrosion.
+<p align="Justify"> This repository contains a model implemented using the YOLOv3 algorithm foto detect corrosion in concrete structures. The model has been trained on a custom dataset of images of various concrete structures, focusing on identifying areas affected by corrosion. </p>
 
 ## Repository Contents
 
-- `corrosion_detection_model.ipynb`: Jupyter Notebook containing the code for training the YOLOv3 model on the corrosion detection dataset.
+ <p align="Justify"> - `corrosion_detection_model.ipynb`: Jupyter Notebook containing the code for training the YOLOv3 model on the corrosion detection dataset.</p>
 - `corrosion_weights.pth`: Pre-trained weights of the YOLOv3 model after training on the corrosion detection dataset.
 - `data/`: Directory containing the training dataset images and annotations.
 - `utils/`: Directory containing utility functions for data preprocessing and post-processing of the model's predictions.
