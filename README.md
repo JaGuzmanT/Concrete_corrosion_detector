@@ -1,6 +1,6 @@
 # Corrosion Detection using YOLOv3 👨🏻‍💻
 
-![Corrosion Detection](corrosion_detection.jpg)
+![Corrosion Detection](corrosion_detection.png)
 
 <p align="Justify"> This repository contains a model implemented using the YOLOv3 algorithm foto detect corrosion in concrete structures. The model has been trained on a custom dataset of images of various concrete structures, focusing on identifying areas affected by corrosion. </p>
 
@@ -11,13 +11,18 @@
 <p align="Justify"> - `data/`: Directory containing the training dataset images and annotations.</p>
 <p align="Justify"> - `utils/`: Directory containing utility functions for data preprocessing and post-processing of the model's predictions. </p>
 
-## How to Use 👨‍🏫
+## How to Use for training 👨‍🏫
 
 1. Clone the repository to your local machine using `git clone https://github.com/yourusername/corrosion-detection.git`.
 2. Install the required dependencies using `pip install -r requirements.txt`.
 3. Place your own dataset in the `data/` directory with corresponding annotations.
-4. Run the `corrosion_detection_model.ipynb` notebook to train the model on your dataset.
+4. Run the next line `!python train.py --model_def config/yolov3-custom1C.cfg --data_config config/custom.data --epochs 10 --batch_size 1 --pretrained_weights weights/darknet53.conv.74`.
 5. Once trained, you can use the trained weights in your applications for corrosion detection.
+
+## For inference mode in images 👨‍🏫
+1. Place your own dataset in the `data/samplesC`.
+2. Run the next line `python detectC.py --image_folder data/samplesC/ --model_def config/yolov3-custom1C.cfg --weights_path checkpoints/best.pt --class_path data/custom/classes.txt`.
+3. Check the results in `output/samplesC`.
 
 ## Importance and Relevance 👑
 
