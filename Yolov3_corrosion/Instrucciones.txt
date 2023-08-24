@@ -1,0 +1,66 @@
+1. Abrir el cmd y ejecutar "conda activate deteccionobjetos"
+1.1 Nos ubicamos en la carpeta de nuestro proyecto, en este caso es "D:\PCV\Yolov3cracks_Paper"
+2. Corremos "labelImg"
+3. Nos debe abrir el programa de labelImg, y ahora damos click en "change save dir" y escogemos data, custom y labels
+3. Ahora nos vamos a Open dir  escogemos data, custom y images y damos en seleccionar carpeta. (Aquí previamente se debió haber guardado todas las imagenes)
+4. Nos cargara todas las imagenes y seleccionamos en w y dibujamos una caja alrededor de nuestro objeto, despues damos en d y guardamos nuestro proyecto y así hasta hacerlo para todas las imagenes.
+4.1 Una vez etiquetados nos vamos al fichero raiz y ejecutamos el archivo Yolov3Files.ipynb. Ahí seleccionamos cuanto vamos a dar dataset de entrenamiento y cuanto a prueba. Con el env de Yolocustom
+	Verificamos donde están nuestras imagenes D:\PCV\Yolov3cracks_Paper\data\custom\images
+	Tambien verificamos que se hayan generado los archivos train.txt y valid.txt en D:\PCV\Yolov3cracks_Paper y los copiamos en D:\PCV\Yolov3cracks_Paper\data\custom
+5. Una vez etiquetados nos vamos a la acarpeta de config "cd config"
+	Y abrimos custom.data y cambiamos el número de clases que vamos a entrenar
+	Abrimos el archivo create_custom_model.sh y se configuran las clases y el archivo de .cfg que está en la última línea del código
+
+5. Una vez etiquetadas las imágenes nos vamos a la carpeta data/custom/ verificamos que la cantidad de imagenes en images/ sea igual a la cantidad de etiquetas en labels/
+5.1. Verificamos que el archivo classes.names contenga las clases que estamos buscando en \data\custom
+5.2. Subimos toda nuestra carpeta a Github
+6. Abrimos google Colab
+7. Instalamos las paqueterias necesarias y que sean iguales a las de nuestro entorno donde corrimos el labelImg
+
+	!pip install torch==1.1 torchvision==0.3
+
+	!pip install opencv-python numpy matplotlib tensorboard terminaltables pillow tqdm
+
+	!git clone https://github.com/JaGuzmanT/Yolov3cracks.git
+
+	cd Yolov3cracks
+
+  	import urllib.request
+ 	urllib.request.urlretrieve('https://pjreddie.com/media/files/darknet53.conv.74','/content/Yolov3Custom/weights/darknet53.conv.74')
+
+
+Entrar al directorio /usr/local/lib/python3.7/dist-packages/torchvision/transforms/functional.py
+
+Cambiar esta línea
+
+from PIL import Image, ImageOps, ImageEnhance, PILLOW_VERSION
+Por esta
+
+from PIL import Image, ImageOps, ImageEnhance, __version__ as PILLOW_VERSION
+	
+8. Compilamos la red
+
+	!python train.py --model_def config/yolov3-custom1C.cfg --data_config config/custom.data --epochs 10 --batch_size 1 --pretrained_weights weights/darknet53.conv.74
+
+9. Descargamos el último archivo del checkpoint y lo pegamos en donde está nuestro proyecto, también en la carpeta de checkpoint
+10. Probamos el modelo con la siguiente linea ubicandonos en el fichero principal de nuestro proyecto. Lo que si tienes que cambiar en esta línea es el nombre del archivo del checkpoint que pegaste en la carpeta de
+checkpoints
+	python detectC.py --image_folder data/samplesC/ --model_def config/yolov3-custom1C.cfg --weights_path checkpoints/yolov3_ckpt_252.pth --class_path data/custom/classes.names
+
+11. si tienes problema con el tqdm vuelve a instalar 
+
+	pip install torch==1.5.0+cu101 torchvision==0.6.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html
+y luego otra vez 
+
+	pip install -r requirements.txt
+y pruebas de nuevo corriendo
+
+	python train.py --model_def config/yolov3-custom1C.cfg --data_config config/custom.data --batch_size 1 --pretrained_weights weights/darknet53.conv.74
+
+copy con resultados.txt
+
+
+python detect_customized.py --image_folder data/samplesC/ --model_def config/yolov3-custom1C.cfg --weights_path checkpoints/yolov3_ckpt_199.pth --class_path data/custom/classes.txt
+python detectC.py --image_folder data/samplesC/ --model_def config/yolov3-custom1C.cfg --weights_path checkpoints/yolov3_ckpt_199.pth --class_path data/custom/classes.txt
+
+python deteccion_video.py  --model_def config/yolov3-custom1C.cfg  --directorio_video Banqueta.mp4 --checkpoint_model checkpoints/yolov3_ckpt_99.pth --class_path data/custom/classes.names --weights_path checkpoints/yolov3_ckpt_400.pth --conf_thres 0.90 --webcam 0
