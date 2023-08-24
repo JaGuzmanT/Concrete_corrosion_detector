@@ -7,9 +7,9 @@
 ## Repository Contents
 
  <p align="Justify"> - `corrosion_detection_model.ipynb`: Jupyter Notebook containing the code for training the YOLOv3 model on the corrosion detection dataset.</p>
-- `corrosion_weights.pth`: Pre-trained weights of the YOLOv3 model after training on the corrosion detection dataset.
-- `data/`: Directory containing the training dataset images and annotations.
-- `utils/`: Directory containing utility functions for data preprocessing and post-processing of the model's predictions.
+<p align="Justify"> - `corrosion_weights.pth`: Pre-trained weights of the YOLOv3 model after training on the corrosion detection dataset. </p>
+<p align="Justify"> - `data/`: Directory containing the training dataset images and annotations.</p>
+<p align="Justify"> - `utils/`: Directory containing utility functions for data preprocessing and post-processing of the model's predictions. </p>
 
 ## How to Use
 
